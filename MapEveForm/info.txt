@@ -1,0 +1,8 @@
+﻿
+sito principale
+	https://dev.eveonline.it/
+
+Token per far funzionare il sito delle mappe
+	d111032c-ef75-4bfd-938e-241ae7b08310
+
+ 
