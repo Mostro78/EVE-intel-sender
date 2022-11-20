@@ -273,8 +273,9 @@ namespace MapEveForm
                 var values = new Dictionary<string, string>
               {
                   { "uuid", token },
-                  { "system", message.solarSystemID },
+                  { "system", message.solarSystemID },                 
                   { "sender", message.sender },
+                  { "systemName", message.solarSystem },
                   { "string", message.message }
               };
                 //gli devo tirare fuori il token dal file salvato 

@@ -37,12 +37,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(610, 374);
+            this.button1.Location = new System.Drawing.Point(434, 360);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 44);
             this.button1.TabIndex = 0;
             this.button1.Text = "start";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkedLBEVE
@@ -87,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 450);
+            this.ClientSize = new System.Drawing.Size(555, 450);
             this.Controls.Add(this.CLBPlayer);
             this.Controls.Add(this.LbPlayerName);
             this.Controls.Add(this.btSave);

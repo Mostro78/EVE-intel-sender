@@ -23,6 +23,7 @@ namespace MapEveForm
         public DebugForm()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.eve_logo_6ZK_icon;
             //cosi trovo tutti le chat uniche per ogni player
             List<Player> player = new List<Player>();
             // carico i dati dal file del salvataggio

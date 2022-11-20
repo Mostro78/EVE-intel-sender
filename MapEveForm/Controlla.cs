@@ -15,10 +15,11 @@ namespace MapEveForm
     {
         public Save save;
         private List<SolarSystem> solarSystem;
+        private int numMess = 0;
         public Controlla()
         {
             InitializeComponent();
-
+            this.Icon = Properties.Resources.eve_logo_6ZK_icon;
             //carico tutti i sistemi di EVE
 
             using (StreamReader r = new StreamReader(new MemoryStream(Properties.Resources.mapSolarSystems)))
@@ -44,7 +45,7 @@ namespace MapEveForm
 
         private void Controlla_Shown(object sender, EventArgs e)
         {
-            this.Hide();
+            //this.Hide();
         }
         private static readonly HttpClient client = new HttpClient();
         private void Timer_Tick(object? sender, EventArgs e)
@@ -61,11 +62,13 @@ namespace MapEveForm
                 if (messaggi.Count > 0)
                     if (messaggi[0] != null)
                     {
+                        numMess = numMess + 1;
                         if (player.lastMessage == null)
                         {
-                            label1.Text = messaggi[0].solarSystem + " : " + messaggi[0].message;
+                            tbMessage.Text = messaggi[0].solarSystem + " : " + messaggi[0].message;
+                            lbMessage.Text = numMess.ToString();
                             //invio il messaggio al server
-                            
+
                             player.lastMessage = new List<Messagelog>();
                             foreach (Messagelog ml in messaggi)
                             {
@@ -85,7 +88,8 @@ namespace MapEveForm
                                 //ho trovato un nuovo messaggio
                                 //rimuovo il vecchio messaggio e aggiungo quello nuovo dal player.lastmessage
                                 foreach (Messagelog ml in mlist) {
-                                    label1.Text ="ChatN:" + ml.chatName + " SolSys:"+ ml.solarSystem + "  Mess:" + ml.message;
+                                    tbMessage.Text ="ChatN:" + ml.chatName + " SolSys:"+ ml.solarSystem + "  Mess:" + ml.message;
+                                    lbMessage.Text = numMess.ToString();
                                     player.lastMessage.FindAll(m => ((m.message == ml.message) && (m.chatName != ml.chatName)));
                                     player.lastMessage.Add(ml);
                                     Function.sendPost(ml, save.Token, client);
