@@ -51,13 +51,12 @@
             // 
             // MapEveForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.AutoScroll = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(550, 42);
             this.Controls.Add(this.tbToken);
             this.Controls.Add(this.btSave);
-            this.MaximumSize = new System.Drawing.Size(566, 81);
-            this.MinimumSize = new System.Drawing.Size(566, 81);
             this.Name = "MapEveForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Insert Token";

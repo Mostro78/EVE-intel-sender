@@ -16,8 +16,6 @@ namespace MapEveForm
 {
     public partial class DebugForm : Form
     {
-
-        
         private List<Player> players = new List<Player>();
         private Save save = new Save();
         public DebugForm()
@@ -57,10 +55,6 @@ namespace MapEveForm
             }
 
         }
-
-
-
- 
 
         private void button1_Click(object sender, EventArgs e)
         {
