@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -157,8 +158,12 @@ namespace MapEveForm
         {
             using (Stream stream = File.Open(filePath, append ? FileMode.Append : FileMode.Create))
             {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                binaryFormatter.Serialize(stream, objectToWrite);
+                var formatter = new BinaryFormatter();
+                #pragma warning disable SYSLIB0011
+                formatter.Serialize(stream, objectToWrite);
+
+                //var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+                //binaryFormatter.Serialize(stream, objectToWrite);
             }
         }
 
@@ -172,8 +177,9 @@ namespace MapEveForm
         {
             using (Stream stream = File.Open(filePath, FileMode.Open))
             {
-                var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                return (T)binaryFormatter.Deserialize(stream);
+                var formatter = new BinaryFormatter();
+                return (T)formatter.Deserialize(stream);
+
             }
         }
 

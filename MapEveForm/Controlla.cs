@@ -13,12 +13,17 @@ namespace MapEveForm
 {
     public partial class Controlla : Form
     {
+        public DebugForm debugForm;
+        public MapEveForm mapEveForm;
         public Save save;
         private List<SolarSystem> solarSystem;
         private int numMess = 0;
         public Controlla()
         {
             InitializeComponent();
+
+
+
             this.Icon = Properties.Resources.eve_logo_6ZK_icon;
             //carico tutti i sistemi di EVE
 
@@ -27,11 +32,25 @@ namespace MapEveForm
                 string json = r.ReadToEnd();
                 solarSystem = JsonConvert.DeserializeObject<List<SolarSystem>>(json);
             }
-           
 
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = 5000;
             timer.Tick += Timer_Tick;
+
+            mapEveForm = new MapEveForm();
+            mapEveForm.save_click += new MapEveForm.Save_click((o, e) => {
+                timer.Stop();
+                save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
+                timer.Start();
+            });
+
+            debugForm = new DebugForm();
+            debugForm.Hide();
+            debugForm.save_click += new DebugForm.Save_click((o, e) => {
+                timer.Stop();
+                save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
+                timer.Start();
+            });
 
             if (File.Exists(Function.getPathFile()))
             {
@@ -40,12 +59,7 @@ namespace MapEveForm
             }
             else
             {
-                DebugForm debugForm =  new DebugForm();
-                debugForm.save_click += new DebugForm.Save_click((o, e)=>{
-                    timer.Stop();
-                    save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
-                    timer.Start();
-                });
+                debugForm.Show();
             }
         }
 

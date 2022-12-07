@@ -14,9 +14,12 @@ namespace MapEveForm
     {
         private string subFolderPath = Function.getPathDir();
         private string nomeFile = Function.getPathFile();
+        public delegate void Save_click(object sender, EventArgs e);
+        public event Save_click save_click;
         public MapEveForm()
         {
             InitializeComponent();
+            this.Hide();
             this.Icon = Properties.Resources.eve_logo_6ZK_icon;
             if (Directory.Exists(subFolderPath))
             {
@@ -47,7 +50,9 @@ namespace MapEveForm
                 }
                 save.Token = tbToken.Text;
                 Function.WriteToBinaryFile(nomeFile, save);
-                this.Close();
+                if (save_click != null)
+                    save_click(sender, e);
+                this.Hide();
 
             }
             catch (Exception err) {
