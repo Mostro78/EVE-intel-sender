@@ -47,7 +47,7 @@
             this.tbMessage.Location = new System.Drawing.Point(12, 27);
             this.tbMessage.Multiline = true;
             this.tbMessage.Name = "tbMessage";
-            this.tbMessage.Size = new System.Drawing.Size(369, 51);
+            this.tbMessage.Size = new System.Drawing.Size(369, 313);
             this.tbMessage.TabIndex = 1;
             // 
             // lbMessage
@@ -63,7 +63,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 86);
+            this.ClientSize = new System.Drawing.Size(393, 352);
             this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.label1);

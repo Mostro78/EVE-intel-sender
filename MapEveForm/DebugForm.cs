@@ -142,7 +142,8 @@ namespace MapEveForm
             }
         }
 
-
+        public delegate void Save_click(object sender, EventArgs e);
+        public event Save_click save_click;
         private void btSave_Click(object sender, EventArgs e)
         {
             //salvo le chat selezionate
@@ -154,6 +155,8 @@ namespace MapEveForm
             }
             var listSelect = checkedLBEVE.CheckedItems;
             Function.WriteToBinaryFile<Save>(pathFile, save);
+            if  (save_click != null)
+                    save_click(sender, e);
             this.Hide();
         }
 

@@ -4,11 +4,11 @@ namespace MapEveForm
 
     internal static class Program
     {
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        
         static void Main()
         {
             // To customize application configuration such as set high DPI settings or default font,
@@ -17,12 +17,11 @@ namespace MapEveForm
             NotifyIcon notifyIcon = new NotifyIcon();
             notifyIcon.ContextMenuStrip = GetContext();
             notifyIcon.Icon = Properties.Resources.eve_logo_6ZK_icon;
-            notifyIcon.Visible = true;            
-            //Application.Run(new DebugForm());
+            notifyIcon.Visible = true;
             Application.Run(new Controlla());
-            //Application.Run(new MapEveForm());
-            
 
+            //Application.Run(new DebugForm());
+            //Application.Run(new MapEveForm());
         }
 
         private static void Application_Idle(object? sender, EventArgs e)
@@ -41,9 +40,18 @@ namespace MapEveForm
         {
             //mi occupa di aprire la finestra e salvare il token in locale
 
-            Form mef = new DebugForm();
-            mef.Show();
+            DebugForm debugForm = new DebugForm();
+            debugForm.save_click += new DebugForm.Save_click((o, e) => {
+               // save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
+            });
+            debugForm.Show();
         }
+
+        private static void Save_click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
         private static void Token_Click(object sender, EventArgs e) {
             //mi occupa di aprire la finestra e salvare il token in locale
             

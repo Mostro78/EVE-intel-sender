@@ -27,6 +27,7 @@ namespace MapEveForm
                 string json = r.ReadToEnd();
                 solarSystem = JsonConvert.DeserializeObject<List<SolarSystem>>(json);
             }
+           
 
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = 5000;
@@ -39,9 +40,18 @@ namespace MapEveForm
             }
             else
             {
-                new DebugForm().ShowDialog();
+                DebugForm debugForm =  new DebugForm();
+                debugForm.save_click += new DebugForm.Save_click((o, e)=>{
+                    timer.Stop();
+                    save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
+                    timer.Start();
+                });
             }
         }
+
+
+
+
 
         private void Controlla_Shown(object sender, EventArgs e)
         {
@@ -65,7 +75,10 @@ namespace MapEveForm
                         numMess = numMess + 1;
                         if (player.lastMessage == null)
                         {
-                            tbMessage.Text = messaggi[0].solarSystem + " : " + messaggi[0].message;
+                            string newLine = Environment.NewLine;
+                            tbMessage.Text = player.Name + newLine + "ChatN:" + messaggi[0].chatName + newLine + "SolSys:" + messaggi[0].solarSystem + newLine + "Mess:" + messaggi[0].message + newLine + "--------------------------------------" + newLine + tbMessage.Text;
+                            tbMessage.ScrollToCaret();
+                            //tbMessage.Text = messaggi[0].solarSystem + " : " + messaggi[0].message;
                             lbMessage.Text = numMess.ToString();
                             //invio il messaggio al server
 
@@ -88,7 +101,9 @@ namespace MapEveForm
                                 //ho trovato un nuovo messaggio
                                 //rimuovo il vecchio messaggio e aggiungo quello nuovo dal player.lastmessage
                                 foreach (Messagelog ml in mlist) {
-                                    tbMessage.Text ="ChatN:" + ml.chatName + " SolSys:"+ ml.solarSystem + "  Mess:" + ml.message;
+                                    string newLine = Environment.NewLine;
+                                    tbMessage.Text =   player.Name + newLine+ "ChatN:" + ml.chatName + newLine + "SolSys:" + ml.solarSystem + newLine + "Mess:" + ml.message + newLine + "--------------------------------------" + newLine + tbMessage.Text ;
+                                    tbMessage.ScrollToCaret();
                                     lbMessage.Text = numMess.ToString();
                                     player.lastMessage.FindAll(m => ((m.message == ml.message) && (m.chatName != ml.chatName)));
                                     player.lastMessage.Add(ml);
