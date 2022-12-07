@@ -14,7 +14,7 @@ namespace MapEveForm
     {
         private string subFolderPath = Function.getPathDir();
         private string nomeFile = Function.getPathFile();
-        public delegate void Save_click(object sender, EventArgs e);
+        public delegate void Save_click(object sender, Save save);
         public event Save_click save_click;
         public MapEveForm()
         {
@@ -51,7 +51,7 @@ namespace MapEveForm
                 save.Token = tbToken.Text;
                 Function.WriteToBinaryFile(nomeFile, save);
                 if (save_click != null)
-                    save_click(sender, e);
+                    save_click(sender, save);
                 this.Hide();
 
             }

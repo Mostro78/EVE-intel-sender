@@ -38,17 +38,17 @@ namespace MapEveForm
             timer.Tick += Timer_Tick;
 
             mapEveForm = new MapEveForm();
-            mapEveForm.save_click += new MapEveForm.Save_click((o, e) => {
+            mapEveForm.save_click += new MapEveForm.Save_click((o, s) => {
                 timer.Stop();
-                save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
+                save = s;// Function.ReadFromBinaryFile<Save>(Function.getPathFile());
                 timer.Start();
             });
 
             debugForm = new DebugForm();
             debugForm.Hide();
-            debugForm.save_click += new DebugForm.Save_click((o, e) => {
+            debugForm.save_click += new DebugForm.Save_click((o, s) => {
                 timer.Stop();
-                save = Function.ReadFromBinaryFile<Save>(Function.getPathFile());
+                save = s;// Function.ReadFromBinaryFile<Save>(Function.getPathFile());
                 timer.Start();
             });
 

@@ -142,7 +142,7 @@ namespace MapEveForm
             }
         }
 
-        public delegate void Save_click(object sender, EventArgs e);
+        public delegate void Save_click(object sender, Save save);
         public event Save_click save_click;
         private void btSave_Click(object sender, EventArgs e)
         {
@@ -156,7 +156,7 @@ namespace MapEveForm
             var listSelect = checkedLBEVE.CheckedItems;
             Function.WriteToBinaryFile<Save>(pathFile, save);
             if  (save_click != null)
-                    save_click(sender, e);
+                    save_click(sender, save);
             this.Hide();
         }
 
