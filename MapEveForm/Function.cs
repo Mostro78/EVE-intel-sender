@@ -98,29 +98,34 @@ namespace MapEveForm
                 file.LastWriteTimeUtc >= DateTime.UtcNow.AddDays(-10));
             foreach (var info in file)
             {
-                string ChatName = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[3]);
-                string Date = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[2]);
-                string Time = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[1]);
-                string IDP = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[0]);
-
-
-                string PlayerName = "";
-                using (var fs = new FileStream(info.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                using (var sr = new StreamReader(fs, Encoding.Default))
+                //se i file non sono della forma giusta devo skipparli
+                bool file_control = Function.Reverse(info.Name.Replace(".txt", "")).Split("_").Length > 3;
+                if (file_control)
                 {
-                    string line = "";
-                    while (sr.EndOfStream == false)
+                    string ChatName = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[3]);
+                    string Date = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[2]);
+                    string Time = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[1]);
+                    string IDP = Function.Reverse(Function.Reverse(info.Name.Replace(".txt", "")).Split("_")[0]);
+
+
+                    string PlayerName = "";
+                    using (var fs = new FileStream(info.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var sr = new StreamReader(fs, Encoding.Default))
                     {
-                        line = sr.ReadLine();
-                        if (line.Contains("  Listener:  ")) {
-                            PlayerName  = line.Substring(27);
-                            break;
+                        string line = "";
+                        while (sr.EndOfStream == false)
+                        {
+                            line = sr.ReadLine();
+                            if (line.Contains("  Listener:  "))
+                            {
+                                PlayerName = line.Substring(27);
+                                break;
+                            }
                         }
                     }
+                    if (IDPlayer == IDP || IDPlayer == null)
+                        ChatFile.Add(new Chat { playerID = IDP, time = Time, date = Date, playerName = PlayerName, chatName = ChatName, pathFile = info.FullName, dateTime = DateTime.ParseExact(Date + Time, "yyyyMMddHHmmss", CultureInfo.InvariantCulture) });
                 }
-                if (IDPlayer == IDP || IDPlayer == null)
-                    ChatFile.Add(new Chat { playerID = IDP, time = Time, date = Date,playerName = PlayerName, chatName = ChatName, pathFile = info.FullName, dateTime = DateTime.ParseExact(Date + Time, "yyyyMMddHHmmss", CultureInfo.InvariantCulture) });
-
             }
             List<Chat> chatFileUnique = new List<Chat>();
             if (last == true) {

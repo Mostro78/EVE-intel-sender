@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbMessage = new System.Windows.Forms.TextBox();
             this.lbMessage = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -59,11 +60,23 @@
             this.lbMessage.TabIndex = 2;
             this.lbMessage.Text = "0";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(109, 9);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(140, 15);
+            this.linkLabel1.TabIndex = 3;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "https://map.eveonline.it/";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // Controlla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 352);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.tbMessage);
             this.Controls.Add(this.label1);
@@ -80,5 +93,6 @@
         private Label label1;
         private TextBox tbMessage;
         private Label lbMessage;
+        private LinkLabel linkLabel1;
     }
 }
